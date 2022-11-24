@@ -6,7 +6,7 @@
 /*   By: afgoncal <massenaafonso1@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:08:57 by afgoncal          #+#    #+#             */
-/*   Updated: 2022/11/10 13:42:25 by afgoncal         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:40:06 by afgoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i] && (char)c != s[i])
-		i++;
-	if ((char)c == s[i])
-		return ((char *)(s + i));
+	while (*s && (char)c != *s)
+		s++;
+	if (*s == (char)c)
+		return ((char *)s);
 	return (0);
 }

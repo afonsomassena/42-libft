@@ -6,7 +6,7 @@
 /*   By: afgoncal <massenaafonso1@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:28:42 by afgoncal          #+#    #+#             */
-/*   Updated: 2022/11/23 16:57:22 by afgoncal         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:33:53 by afgoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	num_words(char const *str, char c)
 
 int	word_len(char const *str, int c, int i)
 {
-	int	l;
+	int	len;
 
-	l = 0;
+	len = 0;
 	while (str[i] != c && str[i] != '\0')
 	{
 		i++;
-		l++;
+		len++;
 	}
-	return (l);
+	return (len);
 }
 
 char	**ft_split(char const *str, char c)
