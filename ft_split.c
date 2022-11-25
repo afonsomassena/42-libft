@@ -6,7 +6,7 @@
 /*   By: afgoncal <massenaafonso1@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:28:42 by afgoncal          #+#    #+#             */
-/*   Updated: 2022/11/24 16:33:53 by afgoncal         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:45:03 by afgoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,43 @@ int	num_words(char const *str, char c)
 	return (n);
 }
 
-int	word_len(char const *str, int c, int i)
+char	*word_dup(const char *str, int start, int finish)
 {
-	int	len;
+	char	*word;
+	int		i;
 
-	len = 0;
-	while (str[i] != c && str[i] != '\0')
-	{
-		i++;
-		len++;
-	}
-	return (len);
+	i = 0;
+	word = malloc((finish - start + 1) * sizeof(char));
+	while (start < finish)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
 }
 
-char	**ft_split(char const *str, char c)
+char	**ft_split(char const *s, char c)
 {
-	char	**split;
 	int		i;
-	int		w;
+	int		j;
 	int		index;
+	char	**split;
 
-	split = (char **)malloc(sizeof(char *) * ((num_words(str, c) + 1)));
-	if (!split)
+	split = malloc((num_words(s, c) + 1) * sizeof(char *));
+	if (!s || !split)
 		return (0);
 	i = 0;
-	index = 0;
-	while (str[i])
+	j = 0;
+	index = -1;
+	while (i <= ft_strlen(s))
 	{
-		w = 0;
-		while (str[i] == c && str[i])
-			i++;
-		if (str[i] != c && str[i] != '\0')
-			split[index] = (char *)malloc(sizeof(char)
-					* (word_len(str, c, i) + 1));
-		while (str[i] != c && str[i])
+		if (s[i] != c && index < 0)
+			index = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
 		{
-			split[index][w] = str[i];
-			i++;
-			w++;
+			split[j++] = word_dup(s, index, i);
+			index = -1;
 		}
-		split[index][w] = '\0';
-		index++;
+		i++;
 	}
-	split[index] = NULL;
+	split[j] = 0;
 	return (split);
 }
